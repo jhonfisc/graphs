@@ -1,9 +1,9 @@
 from tkinter import ttk
 from tkinter import Canvas
 
-from front.createNodes import createNode
-from front.createRoute import initRoute
-from front.createVertices import createVertice
+from ueCases.createNodes import createNode
+from ueCases.createRoute import initRoute
+from ueCases.createVertices import createVertice
 
 canvasDefinition = None
 buttonCreateMode = None
