@@ -9,6 +9,5 @@ def checkNode(nodeInit, nodesList):
     return checkNode
 
 
-
 def calcDistance(nodeInit, nodeEnd):
     return math.sqrt(pow(nodeEnd[0] - nodeInit.x, 2) + pow(nodeEnd[1] - nodeInit.y, 2))

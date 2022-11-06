@@ -1,16 +1,19 @@
 def init():
     global canvasDefinition, buttonCreateMode, buttonVerticeMode, butonRouteMode, labelInitial, labelEnd
-    global createMode, verticeMode, routeMode, nodesList
+    global createMode, verticeMode, routeMode, nodesList, biDirectional, buttonDeleteMode, deleteMode
     canvasDefinition = None
     buttonCreateMode = None
     buttonVerticeMode = None
     butonRouteMode = None
+    buttonDeleteMode = None
     labelInitial = None
     labelEnd = None
     nodesList = []
     createMode = False
     verticeMode = False
     routeMode = False
+    deleteMode = False
+    biDirectional = True
 
 
 def getCreateMode():
@@ -27,6 +30,11 @@ def getRouteMode():
 
 def getNodesList():
     return nodesList
+
+
+def setNodesList(list):
+    global nodesList
+    nodesList = list
 
 
 def getLabelInitial():
@@ -126,3 +134,32 @@ def setCanvas(data):
 
 def getCanvas():
     return canvasDefinition
+
+
+def getDirection():
+    return biDirectional
+
+
+def getButtonDeleteMode():
+    return buttonDeleteMode
+
+
+def setButtonDeleteMode(data):
+    global buttonDeleteMode
+    buttonDeleteMode = data
+
+
+def getDeleteMode():
+    return deleteMode
+
+
+def setDeleteMode(data):
+    global deleteMode
+    deleteMode = data
+
+
+def removeNodeFromList(node):
+    nodeList = getNodesList()
+    if node in nodeList:
+        nodeList.remove(node)
+        setNodesList(nodeList)

@@ -1,4 +1,6 @@
-from domain.entities import setButtonCreateMode, setButtonVerticeMode, setButtonRouteMode, setLabelInitial, setLabelEnd
+from domain.entities import setButtonCreateMode, setButtonVerticeMode, setButtonRouteMode, setLabelInitial, setLabelEnd, \
+    setButtonDeleteMode
+from useCases.deleteNode import deleteNodeMode
 from useCases.setCreateMode import handleCreateMode
 from useCases.setRouteMode import route
 from useCases.setVerticeMode import handleVerticeMode
@@ -8,6 +10,7 @@ def menuInit(screen, ttk):
     setButtonCreateMode(createBtnCreate(ttk, screen))
     setButtonVerticeMode(createBtnVertice(ttk, screen))
     setButtonRouteMode(createBtnRoute(ttk, screen))
+    setButtonDeleteMode(createBtnDelete(ttk, screen))
     setLabelInitial(createLabelInitial(ttk, screen))
     setLabelEnd(createLabelEnd(ttk, screen))
 
@@ -45,3 +48,9 @@ def createLabelEnd(ttk, screen):
     labelEnd.place(x=200, y=20)
     labelEnd.pack()
     return labelEnd
+
+def createBtnDelete(ttk, screen):
+    btnDelete = ttk.Button(screen, name="delete", text="Delete Mode", command=deleteNodeMode)
+    btnDelete.place(x=300, y=20)
+    btnDelete.pack()
+    return btnDelete
