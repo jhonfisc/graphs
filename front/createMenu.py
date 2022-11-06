@@ -1,5 +1,5 @@
-from domain.entities import setButtonCreateMode, setButtonVerticeMode, setButtonRouteMode, setLabelInitial, setLabelEnd, \
-    setButtonDeleteMode
+from domain.entities import setButtonCreateMode, setButtonVerticeMode, setButtonRouteMode, setLabelInitial, \
+    setButtonDeleteMode, setLabelEnd
 from useCases.deleteNode import deleteNodeMode
 from useCases.setCreateMode import handleCreateMode
 from useCases.setRouteMode import route
