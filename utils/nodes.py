@@ -11,3 +11,7 @@ def checkNode(nodeInit, nodesList):
 
 def calcDistance(nodeInit, nodeEnd):
     return math.sqrt(pow(nodeEnd[0] - nodeInit.x, 2) + pow(nodeEnd[1] - nodeInit.y, 2))
+
+
+def isSameNode(initNode, lastNode):
+    return math.sqrt(pow(lastNode[0] - initNode[0], 2) + pow(lastNode[1] - initNode[1], 2)) <= initNode[2]

@@ -1,5 +1,5 @@
 from domain.entities import setLabelInitialAttr, setLabelEndAttr, getDirection
-from utils.nodes import checkNode
+from utils.nodes import checkNode, isSameNode
 
 initialNode = None
 numVertices = 1
@@ -15,23 +15,32 @@ def createVertice(event, canvasDefinition, nodesList):
             setLabelEndAttr("")
     else:
         node = checkNode(event, nodesList)
+        endNode = checkNode(initialNode, nodesList)
         if node != None:
             setLabelEndAttr("End Node " + str(node[3]))
-        newVertice(initialNode, event, canvasDefinition, nodesList)
-        initialNode = None
+            newVertice(initialNode, event, canvasDefinition, nodesList, isSameNode(node, endNode))
+            initialNode = None
 
 
-def newVertice(initialNode, endNode, canvasDefinition, nodesList):
+def newVertice(initialNode, endNode, canvasDefinition, nodesList, sameNode):
     global numVertices
     nodeInit = checkNode(initialNode, nodesList)
     nodeEnd = checkNode(endNode, nodesList)
     if nodeInit is not None and nodeEnd is not None:
-        vertice = canvasDefinition.create_line(initialNode.x, initialNode.y, endNode.x, endNode.y,
+        addCoordY = 0
+        addCoordX = 0
+        if sameNode:
+            addCoordY = 80
+            addCoordX = len(nodeInit[6]) * 10 + 20
+        vertice = canvasDefinition.create_line(initialNode.x - addCoordX / 2, initialNode.y - addCoordY / 2, endNode.x,
+                                               endNode.y,
                                                tags=('vertice-' + str(nodeInit[3]) + '|' + str(nodeEnd[3]),
                                                      'vertice-' + str(nodeEnd[3]) + '|' + str(nodeInit[3]),
                                                      'vertice-' + str(numVertices))
                                                )
-        lbl = canvasDefinition.create_text((initialNode.x + endNode.x) / 2, (initialNode.y + endNode.y) / 2,
+
+        lbl = canvasDefinition.create_text((initialNode.x + endNode.x - addCoordX) / 2,
+                                           (initialNode.y + endNode.y - addCoordY) / 2,
                                            text="{}x".format(numVertices), tags='vertice-lbl-' + str(numVertices))
         square = canvasDefinition.create_rectangle(canvasDefinition.bbox(lbl), fill="white",
                                                    tags='vertice-sqr-' + str(numVertices))
