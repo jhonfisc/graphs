@@ -9,7 +9,7 @@ visitedNodes = []
 
 
 def initRoute(nodeList, node, canvasDefinition):
-    global initNode, finalNode, canvas
+    global initNode, finalNode, canvas, visitedNodes
     if canvas is None:
         canvas = canvasDefinition
     isNode = checkNode(node, nodeList)
@@ -21,6 +21,7 @@ def initRoute(nodeList, node, canvasDefinition):
             calculateRoute(initNode, initNode[4], nodeList, finalNode)
             initNode = None
             finalNode = None
+            visitedNodes = []
 
 
 def calculateRoute(initNode, childList, nodeList, endNode):

@@ -1,5 +1,5 @@
 from domain.entities import setDeleteMode, getDeleteMode, setVerticeMode, setCreateMode, \
-    setButtonCreateModeAttr, setButtonVerticeModeAttr, setButtonRouteModeAttr
+    setButtonCreateModeAttr, setButtonVerticeModeAttr, setButtonRouteModeAttr, setRouteMode
 from utils.nodes import checkNode
 
 
@@ -8,6 +8,7 @@ def deleteNodeMode():
     if getDeleteMode():
         setVerticeMode(False)
         setCreateMode(False)
+        setRouteMode(False)
         setButtonCreateModeAttr('Create Mode')
         setButtonVerticeModeAttr('Vertices Mode')
         setButtonRouteModeAttr('Route Mode')

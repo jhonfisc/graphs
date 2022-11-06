@@ -26,7 +26,8 @@ def newVertice(initialNode, endNode, canvasDefinition, nodesList):
     nodeInit = checkNode(initialNode, nodesList)
     nodeEnd = checkNode(endNode, nodesList)
     if nodeInit is not None and nodeEnd is not None:
-        canvasDefinition.create_line(initialNode.x, initialNode.y, endNode.x, endNode.y, tags='vertice-' + str(numVertices))
+        canvasDefinition.create_line(initialNode.x, initialNode.y, endNode.x, endNode.y,
+                                     tags='vertice-' + str(numVertices))
         setParent(nodesList, nodeInit, nodeEnd, numVertices)
         numVertices += 1
 
@@ -39,3 +40,8 @@ def setParent(nodeLIst, node, child, vertice):
             if getDirection():
                 child[4].append(it[3])
                 child[6].append(vertice)
+
+
+def cleanVertice():
+    global initialNode
+    initialNode = None
