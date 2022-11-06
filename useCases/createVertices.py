@@ -1,12 +1,10 @@
-import math
-
 from domain.entities import setLabelInitialAttr, setLabelEndAttr
 from utils.nodes import checkNode
 
 initialNode = None
 
 
-def createVertice(event, canvasDefinition, nodesList, labelInitial, labelEnd):
+def createVertice(event, canvasDefinition, nodesList):
     global initialNode
     if initialNode == None:
         initialNode = event
