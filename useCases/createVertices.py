@@ -26,8 +26,17 @@ def newVertice(initialNode, endNode, canvasDefinition, nodesList):
     nodeInit = checkNode(initialNode, nodesList)
     nodeEnd = checkNode(endNode, nodesList)
     if nodeInit is not None and nodeEnd is not None:
-        canvasDefinition.create_line(initialNode.x, initialNode.y, endNode.x, endNode.y,
-                                     tags='vertice-' + str(numVertices))
+        vertice = canvasDefinition.create_line(initialNode.x, initialNode.y, endNode.x, endNode.y,
+                                               tags=('vertice-' + str(nodeInit[3]) + '|' + str(nodeEnd[3]),
+                                                     'vertice-' + str(nodeEnd[3]) + '|' + str(nodeInit[3]),
+                                                     'vertice-' + str(numVertices))
+                                               )
+        lbl = canvasDefinition.create_text((initialNode.x + endNode.x) / 2, (initialNode.y + endNode.y) / 2,
+                                           text="{}x".format(numVertices), tags='vertice-lbl-' + str(numVertices))
+        square = canvasDefinition.create_rectangle(canvasDefinition.bbox(lbl), fill="white",
+                                                   tags='vertice-sqr-' + str(numVertices))
+        canvasDefinition.tag_lower(square, lbl)
+        canvasDefinition.tag_lower(vertice)
         setParent(nodesList, nodeInit, nodeEnd, numVertices)
         numVertices += 1
 

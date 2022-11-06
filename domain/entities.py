@@ -163,3 +163,8 @@ def removeNodeFromList(node):
     if node in nodeList:
         nodeList.remove(node)
         setNodesList(nodeList)
+
+
+def deleteNodeFromList(node):
+    global nodesList
+    nodesList.remove(node)

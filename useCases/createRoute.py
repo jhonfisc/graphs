@@ -28,16 +28,18 @@ def calculateRoute(initNode, childList, nodeList, endNode):
     global visitedNodes
     visitedNodes.append(initNode)
     canvas.itemconfig(initNode[5], fill="red")
-    time.sleep(0.3)
     if initNode[3] == endNode[3]:
         return True
+    time.sleep(0.3)
     if len(childList) == 0:
         return False
     for nodeId in childList:
         actualNode = getNode(nodeList, nodeId)
-        if actualNode not in visitedNodes:
+        if actualNode is not None and actualNode not in visitedNodes:
+            canvas.itemconfig('vertice-' + str(initNode[3]) + '|' + str(actualNode[3]), fill="red")
             if calculateRoute(actualNode, actualNode[4], nodeList, endNode):
-                return True
+                break
+    return True
 
 
 def getNode(nodeList, id):
