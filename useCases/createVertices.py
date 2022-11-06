@@ -1,5 +1,6 @@
 import math
 
+from domain.entities import setLabelInitialAttr, setLabelEndAttr
 from utils.nodes import checkNode
 
 initialNode = None
@@ -11,12 +12,12 @@ def createVertice(event, canvasDefinition, nodesList, labelInitial, labelEnd):
         initialNode = event
         node = checkNode(event, nodesList)
         if node != None:
-            labelInitial["text"] = "Initial Node " + str(node[3])
-            labelEnd["text"] = " "
+            setLabelInitialAttr("Initial Node " + str(node[3]))
+            setLabelEndAttr("")
     else:
         node = checkNode(event, nodesList)
         if node != None:
-            labelEnd["text"] = "End Node " + str(node[3])
+            setLabelEndAttr("End Node " + str(node[3]))
         newVertice(initialNode, event, canvasDefinition, nodesList)
         initialNode = None
 
