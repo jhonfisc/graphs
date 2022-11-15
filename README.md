@@ -7,7 +7,7 @@ Dependencies:
 
 features:
 - create nodes for a graph
-- conenct created nodes with vertices
+- connect created nodes with vertices
 - create vertice in same node
 - delete nodes and associated vertices
 - add nodes after graph was created
