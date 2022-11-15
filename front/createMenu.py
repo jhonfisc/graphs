@@ -1,36 +1,40 @@
 from domain.entities import setButtonCreateMode, setButtonVerticeMode, setButtonRouteMode, setLabelInitial, \
-    setButtonDeleteMode, setLabelEnd
+    setButtonDeleteMode, setLabelEnd, setButtonResetMode
+from useCases.checkWalkMode import checkWalk
 from useCases.deleteNode import deleteNodeMode
+from useCases.resetGraph import reset
 from useCases.setCreateMode import handleCreateMode
 from useCases.setRouteMode import route
 from useCases.setVerticeMode import handleVerticeMode
 
 
 def menuInit(screen, ttk):
-    setButtonCreateMode(createBtnCreate(ttk, screen))
-    setButtonVerticeMode(createBtnVertice(ttk, screen))
-    setButtonRouteMode(createBtnRoute(ttk, screen))
-    setButtonDeleteMode(createBtnDelete(ttk, screen))
+    createBtnCreate(ttk, screen)
+    createBtnVertice(ttk, screen)
+    createBtnRoute(ttk, screen)
+    createBtnDelete(ttk, screen)
+    createBtnReset(ttk, screen)
+    createBtnWalk(ttk, screen)
+
+
+def createBtnCreate(ttk, screen):
+    btnCreate = ttk.Button(screen, name="create", text="Create Mode", command=handleCreateMode, width=20)
+    btnCreate.place(x=10, y=10)
+    setButtonCreateMode(btnCreate)
+
+
+def createBtnVertice(ttk, screen):
+    btnVertice = ttk.Button(screen, name="vertices", text="Vertices Mode", command=handleVerticeMode, width=20)
+    btnVertice.place(x=10, y=40)
+    setButtonVerticeMode(btnVertice)
     setLabelInitial(createLabelInitial(ttk, screen))
     setLabelEnd(createLabelEnd(ttk, screen))
 
 
-def createBtnCreate(ttk, screen):
-    btnCreate = ttk.Button(screen, name="create", text="Create Mode", command=handleCreateMode)
-    btnCreate.place(x=10, y=10)
-    return btnCreate
-
-
-def createBtnVertice(ttk, screen):
-    btnVertice = ttk.Button(screen, name="vertices", text="Vertices Mode", command=handleVerticeMode)
-    btnVertice.place(x=10, y=40)
-    return btnVertice
-
-
 def createBtnRoute(ttk, screen):
-    btnRoute = ttk.Button(screen, name="route", text="Route Mode", command=route)
+    btnRoute = ttk.Button(screen, name="route", text="Route Mode", command=route, width=20)
     btnRoute.place(x=10, y=70)
-    return btnRoute
+    setButtonRouteMode(btnRoute)
 
 
 def createLabelInitial(ttk, screen):
@@ -44,7 +48,19 @@ def createLabelEnd(ttk, screen):
     labelEnd.place(x=350, y=10)
     return labelEnd
 
+
 def createBtnDelete(ttk, screen):
-    btnDelete = ttk.Button(screen, name="delete", text="Delete Mode", command=deleteNodeMode)
+    btnDelete = ttk.Button(screen, name="delete", text="Delete Mode", command=deleteNodeMode, width=20)
     btnDelete.place(x=10, y=100)
-    return btnDelete
+    setButtonDeleteMode(btnDelete)
+
+
+def createBtnReset(ttk, screen):
+    btnReset = ttk.Button(screen, name="reset", text="Reset", command=reset, width=20)
+    btnReset.place(x=10, y=130)
+    setButtonResetMode(btnReset)
+
+
+def createBtnWalk(ttk, screen):
+    btnWalk = ttk.Button(screen, name="walk", text="Paseo Euleriano", command=checkWalk, width=20)
+    btnWalk.place(x=10, y=160)

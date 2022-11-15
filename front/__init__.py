@@ -1,8 +1,10 @@
-from domain.entities import getCreateMode, getVerticeMode, getRouteMode, getNodesList, getCanvas, getDeleteMode
+from domain.entities import getCreateMode, getVerticeMode, getRouteMode, getNodesList, getCanvas, getDeleteMode, \
+    getWalkMode
 from front.createScreen import createScreen
 from useCases.createNodes import createNode
 from useCases.createRoute import initRoute
 from useCases.createVertices import createVertice, cleanVertice
+from useCases.createWalkRoute import initWalkRoute
 from useCases.deleteNode import deleteNode
 
 
@@ -22,3 +24,6 @@ def createNodeFromClick(event):
     elif getDeleteMode():
         cleanVertice()
         deleteNode(event, getCanvas(), getNodesList())
+    elif getWalkMode():
+        cleanVertice()
+        initWalkRoute(getNodesList(), event, getCanvas())

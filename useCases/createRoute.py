@@ -1,11 +1,13 @@
 import time
 
-from utils.nodes import checkNode
+from domain.entities import getNodesList
+from utils.nodes import checkNode, getNode
 
 initNode = None
 finalNode = None
 canvas = None
 visitedNodes = []
+visitedVertices = []
 
 
 def initRoute(nodeList, node, canvasDefinition):
@@ -31,7 +33,7 @@ def calculateRoute(initNode, childList, nodeList, endNode, first):
         canvas.itemconfig(initNode[5], fill="green")
     else:
         canvas.itemconfig(initNode[5], fill="orange")
-    if initNode[3] == endNode[3]:
+    if initNode[3] == endNode[3] and not first:
         canvas.itemconfig(initNode[5], fill="red")
         return True
     time.sleep(0.3)
@@ -44,11 +46,3 @@ def calculateRoute(initNode, childList, nodeList, endNode, first):
             if calculateRoute(actualNode, actualNode[4], nodeList, endNode, False):
                 break
     return True
-
-
-def getNode(nodeList, id):
-    actualNode = None
-    for node in nodeList:
-        if node[3] == id:
-            actualNode = node
-    return actualNode

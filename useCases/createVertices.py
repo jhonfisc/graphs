@@ -8,15 +8,15 @@ numVertices = 1
 def createVertice(event, canvasDefinition, nodesList):
     global initialNode
     if initialNode == None:
-        initialNode = event
         node = checkNode(event, nodesList)
         if node != None:
+            initialNode = event
             setLabelInitialAttr("Initial Node " + str(node[3]))
             setLabelEndAttr("")
     else:
         node = checkNode(event, nodesList)
         endNode = checkNode(initialNode, nodesList)
-        if node != None:
+        if node != None and endNode!= None:
             setLabelEndAttr("End Node " + str(node[3]))
             newVertice(initialNode, event, canvasDefinition, nodesList, isSameNode(node, endNode))
             initialNode = None
@@ -35,7 +35,6 @@ def newVertice(initialNode, endNode, canvasDefinition, nodesList, sameNode):
         vertice = canvasDefinition.create_line(initialNode.x - addCoordX / 2, initialNode.y - addCoordY / 2, endNode.x,
                                                endNode.y,
                                                tags=('vertice-' + str(nodeInit[3]) + '|' + str(nodeEnd[3]),
-                                                     'vertice-' + str(nodeEnd[3]) + '|' + str(nodeInit[3]),
                                                      'vertice-' + str(numVertices))
                                                )
 
@@ -47,6 +46,8 @@ def newVertice(initialNode, endNode, canvasDefinition, nodesList, sameNode):
         canvasDefinition.tag_lower(square, lbl)
         canvasDefinition.tag_lower(vertice)
         setParent(nodesList, nodeInit, nodeEnd, numVertices)
+        nodeInit[7] += 1
+        nodeEnd[7] += 1
         numVertices += 1
 
 

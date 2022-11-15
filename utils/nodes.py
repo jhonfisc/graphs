@@ -15,3 +15,10 @@ def calcDistance(nodeInit, nodeEnd):
 
 def isSameNode(initNode, lastNode):
     return math.sqrt(pow(lastNode[0] - initNode[0], 2) + pow(lastNode[1] - initNode[1], 2)) <= initNode[2]
+
+def getNode(nodeList, id):
+    actualNode = None
+    for node in nodeList:
+        if node[3] == id:
+            actualNode = node
+    return actualNode
