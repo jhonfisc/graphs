@@ -2,16 +2,27 @@ from domain import entities
 from tkinter import ttk
 from tkinter import Canvas
 
-from domain.entities import setCanvas
+from domain.entities import setCanvas, getCanvas
 from front.createMenu import menuInit
 
 
-def createScreen(screen, createNodeFromClick):
+def createScreen(screen, event):
     entities.init()
-    screen.title("Graph Visualization")
-    screen.config(width=550, height=550)
-    canvasDefinition = Canvas(screen, width=550, height=550, bg="white")
-    canvasDefinition.bind("<Button-1>", createNodeFromClick)
-    setCanvas(canvasDefinition)
+    newScreen(screen)
+    newCanvas(screen)
+    bindClickEvent(event)
     menuInit(screen, ttk)
-    canvasDefinition.pack()
+    getCanvas().pack()
+
+
+def bindClickEvent(event):
+    getCanvas().bind("<Button-1>", event)
+
+
+def newCanvas(screen):
+     setCanvas(Canvas(screen, width=1024, height=900, bg="white"))
+
+
+def newScreen(screen):
+    screen.title("Graph Visualization")
+    screen.config(width=1024, height=900)

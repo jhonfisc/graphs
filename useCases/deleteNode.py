@@ -1,5 +1,6 @@
 from domain.entities import setDeleteMode, getDeleteMode, setVerticeMode, setCreateMode, \
-    setButtonCreateModeAttr, setButtonVerticeModeAttr, setButtonRouteModeAttr, setRouteMode, deleteNodeFromList
+    setButtonCreateModeAttr, setButtonVerticeModeAttr, setButtonRouteModeAttr, setRouteMode, deleteNodeFromList, \
+    getNodesList
 from utils.nodes import checkNode
 
 
@@ -28,3 +29,7 @@ def deleteNode(event, canvas, nodeList):
                 canvas.delete('vertice-sqr-' + str(it))
 
 
+def deleteFromAdjacency(nodeId):
+    for node in getNodesList():
+        if nodeId in node[4]:
+            node.remove(nodeId)

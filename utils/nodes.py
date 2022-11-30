@@ -4,7 +4,7 @@ import math
 def checkNode(nodeInit, nodesList):
     checkNode = None
     for node in nodesList:
-        if calcDistance(nodeInit, node) <= node[2]:
+        if node is not None and calcDistance(nodeInit, node) <= node[2]:
             checkNode = node
     return checkNode
 
@@ -19,6 +19,6 @@ def isSameNode(initNode, lastNode):
 def getNode(nodeList, id):
     actualNode = None
     for node in nodeList:
-        if node[3] == id:
+        if node is not None and node[3] == id:
             actualNode = node
     return actualNode

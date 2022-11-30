@@ -15,15 +15,15 @@ def screenInit(screen):
 def createNodeFromClick(event):
     if getCreateMode():
         cleanVertice()
-        createNode(event, getCanvas(), getNodesList())
+        createNode(event)
     elif getVerticeMode():
-        createVertice(event, getCanvas(), getNodesList())
+        createVertice(event, getNodesList())
     elif getRouteMode():
         cleanVertice()
-        initRoute(getNodesList(), event, getCanvas())
+        initRoute(getNodesList(), event)
     elif getDeleteMode():
         cleanVertice()
         deleteNode(event, getCanvas(), getNodesList())
     elif getWalkMode():
         cleanVertice()
-        initWalkRoute(getNodesList(), event, getCanvas())
+        initWalkRoute(event)

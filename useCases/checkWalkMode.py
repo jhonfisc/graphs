@@ -1,6 +1,6 @@
-from tkinter import messagebox
-
+from domain.constants import TITLE_ROUTE, MSG_ROUTE
 from domain.entities import getNodesList, setWalkMode
+from front.showMessage import showMessageBox
 
 
 def checkWalk():
@@ -10,12 +10,11 @@ def checkWalk():
     print(nodeList)
     if len(nodeList) > 0:
         for node in nodeList:
-            if node[7] % 2 > 0:
+            if node is not None and node[7] % 2 > 0:
                 isPar = False
                 nodeFail.append(node[3])
     if not isPar:
-        messagebox.showwarning("Warning - Can't Create Route",
-                               'No se puede calcular esta ruta, los nodos con grado impar son: ' + str(nodeFail))
+        showMessageBox(TITLE_ROUTE, MSG_ROUTE, str(nodeFail))
         setWalkMode(False)
     else:
         setWalkMode(True)

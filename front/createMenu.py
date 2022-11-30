@@ -1,8 +1,11 @@
 from domain.entities import setButtonCreateMode, setButtonVerticeMode, setButtonRouteMode, setLabelInitial, \
     setButtonDeleteMode, setLabelEnd, setButtonResetMode
+from useCases.checkBipartito import checkBipartito
+from useCases.checkGraph import checkGraph
 from useCases.checkWalkMode import checkWalk
 from useCases.deleteNode import deleteNodeMode
 from useCases.resetGraph import reset
+from useCases.setColor import setColor
 from useCases.setCreateMode import handleCreateMode
 from useCases.setRouteMode import route
 from useCases.setVerticeMode import handleVerticeMode
@@ -15,6 +18,9 @@ def menuInit(screen, ttk):
     createBtnDelete(ttk, screen)
     createBtnReset(ttk, screen)
     createBtnWalk(ttk, screen)
+    createBtnCheckGraph(ttk, screen)
+    createBtnCheckBipartito(ttk, screen)
+    createBtnColor(ttk, screen)
 
 
 def createBtnCreate(ttk, screen):
@@ -50,7 +56,7 @@ def createLabelEnd(ttk, screen):
 
 
 def createBtnDelete(ttk, screen):
-    btnDelete = ttk.Button(screen, name="delete", text="Delete Mode", command=deleteNodeMode, width=20)
+    btnDelete = ttk.Button(screen, name="delete", text="Delete Node", command=deleteNodeMode, width=20)
     btnDelete.place(x=10, y=100)
     setButtonDeleteMode(btnDelete)
 
@@ -64,3 +70,18 @@ def createBtnReset(ttk, screen):
 def createBtnWalk(ttk, screen):
     btnWalk = ttk.Button(screen, name="walk", text="Paseo Euleriano", command=checkWalk, width=20)
     btnWalk.place(x=10, y=160)
+
+
+def createBtnCheckGraph(ttk, screen):
+    btnCheck = ttk.Button(screen, name="check", text="Verificar Grafo", command=checkGraph, width=20)
+    btnCheck.place(x=10, y=190)
+
+
+def createBtnCheckBipartito(ttk, screen):
+    btnCheck = ttk.Button(screen, name="checkBipartito", text="Verificar Bipartito", command=checkBipartito, width=20)
+    btnCheck.place(x=10, y=220)
+
+
+def createBtnColor(ttk, screen):
+    btnCheck = ttk.Button(screen, name="color", text="Colorear", command=setColor, width=20)
+    btnCheck.place(x=10, y=250)

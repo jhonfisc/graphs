@@ -1,50 +1,33 @@
-from domain.entities import setLabelInitialAttr, setLabelEndAttr, getDirection
+from domain.entities import setLabelInitialAttr, setLabelEndAttr, getDirection, getCanvas
+from front.createVertice import creteVertice
 from utils.nodes import checkNode, isSameNode
 
 initialNode = None
 numVertices = 1
+first = False
 
 
-def createVertice(event, canvasDefinition, nodesList):
+def createVertice(event, nodesList):
     global initialNode
-    if initialNode == None:
+    if initialNode is None:
         node = checkNode(event, nodesList)
-        if node != None:
+        if node is not None:
             initialNode = event
-            setLabelInitialAttr("Initial Node " + str(node[3]))
-            setLabelEndAttr("")
     else:
         node = checkNode(event, nodesList)
         endNode = checkNode(initialNode, nodesList)
-        if node != None and endNode!= None:
-            setLabelEndAttr("End Node " + str(node[3]))
-            newVertice(initialNode, event, canvasDefinition, nodesList, isSameNode(node, endNode))
+        if node is not None and endNode is not None:
+            newVertice(initialNode, event, nodesList, isSameNode(node, endNode))
             initialNode = None
 
 
-def newVertice(initialNode, endNode, canvasDefinition, nodesList, sameNode):
+def newVertice(initialNode, endNode, nodesList, sameNode):
     global numVertices
     nodeInit = checkNode(initialNode, nodesList)
     nodeEnd = checkNode(endNode, nodesList)
     if nodeInit is not None and nodeEnd is not None:
-        addCoordY = 0
-        addCoordX = 0
-        if sameNode:
-            addCoordY = 80
-            addCoordX = len(nodeInit[6]) * 10 + 20
-        vertice = canvasDefinition.create_line(initialNode.x - addCoordX / 2, initialNode.y - addCoordY / 2, endNode.x,
-                                               endNode.y,
-                                               tags=('vertice-' + str(nodeInit[3]) + '|' + str(nodeEnd[3]),
-                                                     'vertice-' + str(numVertices))
-                                               )
-
-        lbl = canvasDefinition.create_text((initialNode.x + endNode.x - addCoordX) / 2,
-                                           (initialNode.y + endNode.y - addCoordY) / 2,
-                                           text="{}x".format(numVertices), tags='vertice-lbl-' + str(numVertices))
-        square = canvasDefinition.create_rectangle(canvasDefinition.bbox(lbl), fill="white",
-                                                   tags='vertice-sqr-' + str(numVertices))
-        canvasDefinition.tag_lower(square, lbl)
-        canvasDefinition.tag_lower(vertice)
+        creteVertice(initialNode, endNode, getCoordX(sameNode, nodeInit), getCoordY(sameNode), nodeEnd, nodeInit,
+                     numVertices)
         setParent(nodesList, nodeInit, nodeEnd, numVertices)
         nodeInit[7] += 1
         nodeEnd[7] += 1
@@ -53,7 +36,7 @@ def newVertice(initialNode, endNode, canvasDefinition, nodesList, sameNode):
 
 def setParent(nodeLIst, node, child, vertice):
     for it in nodeLIst:
-        if it[3] == node[3]:
+        if it is not None and it[3] == node[3]:
             it[4].append(child[3])
             it[6].append(vertice)
             if getDirection():
@@ -64,3 +47,11 @@ def setParent(nodeLIst, node, child, vertice):
 def cleanVertice():
     global initialNode
     initialNode = None
+
+
+def getCoordY(sameNode):
+    return 0 if not sameNode else 80
+
+
+def getCoordX(sameNode, nodeInit):
+    return 0 if not sameNode else len(nodeInit[6]) * 10 + 20
